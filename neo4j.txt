@@ -1,0 +1,108 @@
+// Création de six entreprises avec leur nom, secteur d'activité, date de création et taille, vous pouvez ajouter toutes les requêtes dans la console.
+create(a:ENTREPRISE{Nom:"Thales",Secteur_activité:"aérospatiale,défense,sécurité",Date_création:2000,Taille:64000})
+create(b:ENTREPRISE{Nom:"IBM",Secteur_activité:"matériel informatique,logiciel et services informatiques",Date_création:1911,Taille:380300})
+create(c:ENTREPRISE{Nom:"Dassault Systemes",Secteur_activité:"éditeur de logiciels spécialisé dans la conception 3D, le maquettisme numérique 3D",Date_création: 1981,Taille:16140 })
+create(d:ENTREPRISE{Nom:"Microsoft",Secteur_activité:"systèmes d'exploitation,informatique",Date_création:1975,Taille:131300})
+create(e:ENTREPRISE{Nom:"Apple",Secteur_activité:"systèmes d'exploitations,logiciels informatiques,produits électroniques",Date_création:1977,Taille:123000})
+create(f:ENTREPRISE{Nom:"Samsung",Secteur_activité:"produits électroniques",Date_création:1938,Taille:489000})
+
+// Création d'index pour faciliter la recherche d'entreprises sur leurs attributs
+create index on : ENTREPRISE(Date_création,Nom,Secteur_activité,Taille)
+
+//Création des utilisateurs de l'application, vous pouvez ajouter toutes les requêtes dans la console.
+create(a:UTILISATEUR{nom:"Hennequin",prénom:"Mehdi",liste_des_compétences:"java,SQL,python,c++"})
+create(b:UTILISATEUR{nom:"Bouin",prénom:"Jeremy",liste_des_compétences:"javascript,NoSQL,python,c++,réseaux"})
+create(c:UTILISATEUR{nom:"Lafripouille",prénom:"Jacque",liste_des_compétences:"javascript,NoSQL,python,machine learning,data"})
+create(d:UTILISATEUR{nom:"Delafontaine",prénom:"Jean",liste_des_compétences:"javascript,deep learning,python,machine learning,data"})
+create(e:UTILISATEUR{nom:"Delatourette",prénom:"Jill",liste_des_compétences:"javascript,deep learning,image,opencv,data"})
+create(f:UTILISATEUR{nom:"Spartiate",prénom:"Khratos",liste_des_compétences:"javascript,deep learning,image,opencv,électronique"})
+create(i:UTILISATEUR{nom:"Asguard",prénom:"Thor",liste_des_compétences:"javascript,télécom,vision,opencv,électronique"})
+create(j:UTILISATEUR{nom:"Diablo",prénom:"Necromancien",liste_des_compétences:"NodeJs,PHP,CSS,vision,opencv,Syteme électronique"})
+create(k:UTILISATEUR{nom:"Jackson",prénom:"Mickael",liste_des_compétences:"NodeJs,télécom,vision,opencv,Syteme électronique"})
+create(l:UTILISATEUR{nom:"Takken",prénom:"Raid",liste_des_compétences:"NodeJs,PHP,CSS,image,opencv,Syteme électronique"})
+create(m:UTILISATEUR{nom:"Zidane",prénom:"Zinedine",liste_des_compétences:"NodeJs,PHP,CSS,photonique,microélectronique,électronique de puissance"})
+create(n:UTILISATEUR{nom:"Chiracq",prénom:"Louis",liste_des_compétences:"NodeJs,PHP,CSS,photonique,microélectronique,mécanique quantique"})
+create(o:UTILISATEUR{nom:"Aziz",prénom:"Boutéflica",liste_des_compétences:"HTML,PHP,CSS,web sémantique,microélectronique,électronique de puissance"})
+create(p:UTILISATEUR{nom:"San",prénom:"Goku",liste_des_compétences:"HTML,PHP,CSS,web sémantique,microélectronique,électronique de puissance,NodeJs"})
+create(q:UTILISATEUR{nom:"Trunk",prénom:"Vegeta",liste_des_compétences:"HTML,PHP,CSS,web sémantique,microélectronique,télécom,NodeJs"})
+create(r:UTILISATEUR{nom:"Drake",prénom:"Aubrey",liste_des_compétences:"HTML,PHP,CSS,web sémantique,microélectronique,électronique de puissance,NodeJs"})
+create(s:UTILISATEUR{nom:"Hulk",prénom:"Docteur",liste_des_compétences:"HTML,PHP,CSS,mécanique quantique,microélectronique,électronique de puissance,NodeJs"})
+create(t:UTILISATEUR{nom:"Power",prénom:"Ranger",liste_des_compétences:"HTML,PHP,CSS,mécanique quantique,microélectronique,photonique,NodeJs"})
+create(u:UTILISATEUR{nom:"Parker",prénom:"Peter",liste_des_compétences:"HTML,PHP,CSS,photonique,microélectronique,électronique de puissance,NodeJs"})
+create(v:UTILISATEUR{nom:"Sparow",prénom:"Tom",liste_des_compétences:"HTML,PHP,CSS,photonique,microélectronique,Data mining,NodeJs"})
+
+// Création d'un index sur les attributs des utilisateurs pour faciliter la recherche
+create index on : UTILISATEUR(prénom,nom,liste_des_compétences)
+
+// Création de relations entre les utilisateurs et les entreprises, attention ici il faut ajouter les requêtes dans la console une par une.
+match (a:UTILISATEUR),(c:ENTREPRISE) where a.prénom="Mehdi" and c.Nom="IBM" create (a)-[r:WORK_AT{poste:"Ingénieur recherche",date_start:2019}]->(c)
+match (a:UTILISATEUR),(c:ENTREPRISE) where a.prénom="Jeremy" and c.Nom="IBM" create (a)-[r:WORK_AT{poste:"Ingénieur recherche",date_start:2019}]->(c)
+match (a:UTILISATEUR),(c:ENTREPRISE) where a.prénom="Khratos" and c.Nom="IBM" create (a)-[r:WORK_AT{poste:"Ingénieur recherche",date_start:2019}]->(c)
+match (a:UTILISATEUR),(c:ENTREPRISE) where a.prénom="Khratos" and c.Nom="Microsoft" create (a)-[r:WORKED_AT{poste:"stagiaire développeur",date_start:2017,date_end:2018}]->(c)
+match (a:UTILISATEUR),(c:ENTREPRISE) where a.prénom="Mehdi" and c.Nom="Samsung" create (a)-[r:WORKED_AT{poste:"développeur web",date_start:2016,date_end:2018}]->(c)
+match (a:UTILISATEUR),(c:ENTREPRISE) where a.prénom="Thor" and c.Nom="Microsoft" create (a)-[r:WORK_AT{poste:"Ingénieur informatique",date_start:2016}]->(c)
+match (a:UTILISATEUR),(c:ENTREPRISE) where a.prénom="Goku" and c.Nom="Microsoft" create (a)-[r:WORK_AT{poste:"doctorant informatique",date_start:2014}]->(c)
+match (a:UTILISATEUR),(c:ENTREPRISE) where a.prénom="Mickael" and c.Nom="Microsoft" create (a)-[r:WORK_AT{poste:"Ingénieur cryptographie",date_start:2013}]->(c)
+match (a:UTILISATEUR),(c:ENTREPRISE) where a.prénom="Jacque" and c.Nom="Samsung" create (a)-[r:WORK_AT{poste:"Ingénieur cryptographie",date_start:2013}]->(c)
+match (a:UTILISATEUR),(c:ENTREPRISE) where a.prénom="Boutéflica" and c.Nom="Samsung" create (a)-[r:WORK_AT{poste:"PDG of Samsung",date_start:2013}]->(c)
+match (a:UTILISATEUR),(c:ENTREPRISE) where a.prénom="Vegeta" and c.Nom="Samsung" create (a)-[r:WORK_AT{poste:"Ingénieur électronique embarqué",date_start:2015}]->(c)
+match (a:UTILISATEUR),(c:ENTREPRISE) where a.prénom="Docteur" and c.Nom="Apple" create (a)-[r:WORK_AT{poste:"Ingénieur électronique embarqué",date_start:2016}]->(c)
+match (a:UTILISATEUR),(c:ENTREPRISE) where a.prénom="Aubrey" and c.Nom="Apple" create (a)-[r:WORK_AT{poste:"Ingénieur électronique embarqué",date_start:2011}]->(c)
+match (a:UTILISATEUR),(c:ENTREPRISE) where a.prénom="Raid" and c.Nom="Apple" create (a)-[r:WORK_AT{poste:"Ingénieur électronique embarqué",date_start:2011}]->(c)
+match (a:UTILISATEUR),(c:ENTREPRISE) where a.prénom="Jean" and c.Nom="Thales" create (a)-[r:WORK_AT{poste:"Ingénieur data base",date_start:2013}]->(c)
+match (a:UTILISATEUR),(c:ENTREPRISE) where a.prénom="Zinedine" and c.Nom="Thales" create (a)-[r:WORK_AT{poste:"Ingénieur télécom",date_start:2013}]->(c)
+match (a:UTILISATEUR),(c:ENTREPRISE) where a.prénom="Jill" and c.Nom="Thales" create (a)-[r:WORK_AT{poste:"Ingénieur commercial",date_start:2013}]->(c)
+match (a:UTILISATEUR),(c:ENTREPRISE) where a.prénom="Necromancien" and c.Nom="Dassault Systemes" create (a)-[r:WORK_AT{poste:"Ingénieur télécom",date_start:2013}]->(c)
+match (a:UTILISATEUR),(c:ENTREPRISE) where a.prénom="Louis" and c.Nom="Dassault Systemes" create (a)-[r:WORK_AT{poste:"Ingénieur électronique quantique",date_start:2015}]->(c)
+match (a:UTILISATEUR),(c:ENTREPRISE) where a.prénom="Ranger" and c.Nom="Dassault Systemes" create (a)-[r:WORK_AT{poste:"Ingénieur automatisme",date_start:2009}]->(c)
+match (a:UTILISATEUR),(c:ENTREPRISE) where a.prénom="Peter" and c.Nom="Dassault Systemes" create (a)-[r:WORK_AT{poste:"Ingénieur informatique",date_start:2012}]->(c)
+
+//création des relation entre les utilisateurs 
+match (a:UTILISATEUR),(b:UTILISATEUR) where a.prénom="Mehdi" and b.prénom="Jeremy" create (a)-[r:Link{work:"IBM",date:2019}]->(b)
+match (a:UTILISATEUR),(b:UTILISATEUR) where a.prénom="Mehdi" and b.prénom="Louis" create (a)-[r:Link{work:"IBM",date:2019}]->(b)
+match (a:UTILISATEUR),(b:UTILISATEUR) where a.prénom="Louis" and b.prénom="Khratos" create (a)-[r:Link{work:"IBM",date:2019}]->(b)
+match (a:UTILISATEUR),(b:UTILISATEUR) where a.prénom="Thor" and b.prénom="Khratos" create (a)-[r:Link{work:"IBM",date:2017}]->(b)
+match (a:UTILISATEUR),(b:UTILISATEUR) where a.prénom="Thor" and b.prénom="Mickael" create (a)-[r:Link{work:"IBM",date:2017}]->(b)
+match (a:UTILISATEUR),(b:UTILISATEUR) where a.prénom="Jeremy" and b.prénom="Aubrey" create (a)-[r:Link{work:"IBM",date:2017}]->(b)
+match (a:UTILISATEUR),(b:UTILISATEUR) where a.prénom="Docteur" and b.prénom="Raid" create (a)-[r:Link{work:"IBM",date:2017}]->(b)
+match (a:UTILISATEUR),(b:UTILISATEUR) where a.prénom="Mehdi" and b.prénom="Vegeta" create (a)-[r:Link{work:"IBM",date:2016}]->(b)
+match (a:UTILISATEUR),(b:UTILISATEUR) where a.prénom="Jacque" and b.prénom="Boutéflica" create (a)-[r:Link{work:"IBM",date:2013}]->(b)
+match (a:UTILISATEUR),(b:UTILISATEUR) where a.prénom="Jean" and b.prénom="Jill" create (a)-[r:Link{work:"IBM",date:2013}]->(b)
+match (aj:UTILISATEUR),(b:UTILISATEUR) where a.prénom="Peter" and b.prénom="Ranger" create (a)-[r:Link{work:"IBM",date:2012}]->(b)
+
+
+
+// Analylse du graphe
+// Requête qui permet d'obtenir le nom de toutes les entreprises sur l'application
+match(entreprise:ENTREPRISE) return entreprise.Nom
+
+// Requête qui permet d'afficher une entreprise spécifique
+// Il suffit de mettre le nom de l'entreprise dans la condition where
+match(a:ENTREPRISE) where a.Nom = "IBM" return a
+
+// Requête qui permet d'afficher le prénom de tous les utilisateurs de l'application
+match(entreprise:UTILISATEUR) return entreprise.prénom
+
+// Requête qui permet d'afficher un utilisateur spécifique
+match(a:UTILISATEUR) where a.prénom = "Vegeta" return a
+
+
+
+// Requêtes de suggestion à éffectuer une par une
+// Utilisateurs travaillant en même temps qu’un utilisateur donné dans ses anciennes entreprises
+match(a:UTILISATEUR{prénom:"Mehdi"})-[r:WORKED_AT]-(b:ENTREPRISE)-[x:WORK_AT]-(c:UTILISATEUR) where r.date_end >= x.date_start  return c.prénom
+match(a:UTILISATEUR{prénom:"Jeremy"})-[r:WORKED_AT]-(b:ENTREPRISE)-[x:WORK_AT]-(c:UTILISATEUR) where r.date_end >= x.date_start  return c.prénom
+
+// Utilisateurs travaillant en même temps qu’un utilisateur donné dans son entreprise
+match(a:UTILISATEUR{prénom:"Jeremy"})-[r:WORK_AT]-(b:ENTREPRISE)-[x:WORK_AT]-(c:UTILISATEUR) return c.prénom
+match(a:UTILISATEUR{prénom:"Zinedine"})-[r:WORK_AT]-(b:ENTREPRISE)-[x:WORK_AT]-(c:UTILISATEUR) return c.prénom
+
+// Utilisateurs ayant travaillé dans l'entreprise de l'utilisateur pas forcément en même temps que l'utilisateur 
+match(a:UTILISATEUR{prénom:"Goku"})-[r:WORK_AT]-(b:ENTREPRISE)-[x:WORKED_AT]-(c:UTILISATEUR) return c.prénom
+match(a:UTILISATEUR{prénom:"Raid"})-[r:WORK_AT]-(b:ENTREPRISE)-[x:WORKED_AT]-(c:UTILISATEUR) return c.prénom
+
+// Connaissances de l'utilisateur
+match(a:UTILISATEUR{prénom:"Khratos"})-[r:Link]-(b:UTILISATEUR)  return b.prénom
+
+// Utilisateurs connus par les connaissances d’un utilisateur donné
+match(a:UTILISATEUR{prénom:"Khratos"})-[r:Link]-(b:UTILISATEUR)-[x:Link]-(c:UTILISATEUR) return c.prénom
